@@ -254,7 +254,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   puma (~> 4.1)
-  rails (~> 6.0.1)
+  rails (~> 6.0.2)
   rails-controller-testing
   sass-rails (>= 6)
   selenium-webdriver
