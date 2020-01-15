@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class PasswordResetsTest < ActionDispatch::IntegrationTest
@@ -6,11 +8,11 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
-  test "password resets" do
+  test 'password resets' do
     get new_password_reset_path
     assert_template 'password_resets/new'
     # Invalid email
-    post password_resets_path, params: { password_reset: { email: "" } }
+    post password_resets_path, params: { password_reset: { email: '' } }
     assert_not flash.empty?
     assert_template 'password_resets/new'
     # Valid email
@@ -22,7 +24,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     # Password reset form
     user = assigns(:user)
     # Wrong email
-    get edit_password_reset_path(user.reset_token, email: "")
+    get edit_password_reset_path(user.reset_token, email: '')
     assert_redirected_to root_url
     # Inactive user
     user.toggle!(:activated)

@@ -1,10 +1,11 @@
-class PasswordResetsController < ApplicationController
-  before_action :get_user,   only: [:edit, :update]
-  before_action :valid_user, only: [:edit, :update]
-  before_action :check_expiration, only: [:edit, :update] # Case (1)
+# frozen_string_literal: true
 
-  def new
-  end
+class PasswordResetsController < ApplicationController
+  before_action :get_user,   only: %i[edit update]
+  before_action :valid_user, only: %i[edit update]
+  before_action :check_expiration, only: %i[edit update] # Case (1)
+
+  def new; end
 
   def create
     @user = User.find_by(email: params[:password_reset][:email].downcase)
@@ -19,8 +20,7 @@ class PasswordResetsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if params[:user][:password].empty?                  # Case (3)
@@ -49,7 +49,7 @@ class PasswordResetsController < ApplicationController
 
   # Confirms a valid user.
   def valid_user
-    unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+    unless @user&.activated? && @user&.authenticated?(:reset, params[:id])
       redirect_to root_url
     end
   end

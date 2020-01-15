@@ -38,3 +38,7 @@ yarn-debug.log*
 # Ignore Spring files.
 /spring/*.pid
 
+.idea
+
+# Ignore uploaded test images.
+/public/uploads
